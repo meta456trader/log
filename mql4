@@ -1,1 +1,13 @@
 
+Timestamp: When the event occurred.
+Log Level (optional): Severity of the message (e.g., INFO, ERROR, DEBUG, WARNING).
+Component Name (e.g., EA Name): Identifies the source of the log.
+Context (e.g., Symbol): Relevant trading pair or asset.
+Message: Detailed information about the event.
+
+
+
+void Log(string message)
+{
+    Print(StringFormat("[%s][%s][%s][%s] %s", TimeToString(TimeCurrent(), TIME_DATE | TIME_MINUTES), "INFO", EA_NAME, _Symbol, message));
+}
