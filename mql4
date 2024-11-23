@@ -1,13 +1,24 @@
+Timestamp: Indicates when the log was created.
+Log Level: Categorizes the type of message (e.g., INFO, ERROR).
+Line Number: Specifies where the log was generated in the code.
+EA Name: Identifies the EA generating the log.
+Symbol: Provides context about the trading asset.
+Message: Contains the actual log content.
 
-Timestamp: When the event occurred.
-Log Level (optional): Severity of the message (e.g., INFO, ERROR, DEBUG, WARNING).
-Component Name (e.g., EA Name): Identifies the source of the log.
-Context (e.g., Symbol): Relevant trading pair or asset.
-Message: Detailed information about the event.
 
-
-
-void Log(string message)
+void Log(string message, int line)
 {
-    Print(StringFormat("[%s][%s][%s][%s] %s", TimeToString(TimeCurrent(), TIME_DATE | TIME_MINUTES), "INFO", EA_NAME, _Symbol, message));
+    Print(StringFormat("[%s][%s][Line: %d][%s][%s] %s", 
+        TimeToString(TimeCurrent(), TIME_DATE | TIME_MINUTES), // Timestamp
+        "INFO",                                              // Log Level
+        line,                                                // Line Number
+        EA_NAME,                                             // EA Name
+        _Symbol,                                             // Symbol
+        message));                                           // Log Message
+}
+
+if (xtphit >= TPsteps)
+{
+    tppauseEA = true;
+    Log("xtphit reached TPsteps. Closing Position.", __LINE__);
 }
